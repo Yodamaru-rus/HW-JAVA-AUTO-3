@@ -39,7 +39,7 @@ public class SeleniumTest {
 
     @Test
     void firstPositiveTest(){
-        WebElement form = driver.findElement(By.className("form_theme_alfa-on-white"));
+        WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Тестов Тест");
         form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79876543221");
         form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -50,37 +50,37 @@ public class SeleniumTest {
 
     @Test
     void nameNegativeTest(){
-        WebElement form = driver.findElement(By.className("form_theme_alfa-on-white"));
+        WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79876543221");
         form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         form.findElement(By.cssSelector("button")).click();
-        String text = driver.findElement(By.className("input_invalid")).findElement(By.className("input__sub")).getText();
+        String text = driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).getText();
         assertEquals("Поле обязательно для заполнения", text.trim());
     }
 
     @Test
     void phoneNegativeTest(){
-        WebElement form = driver.findElement(By.className("form_theme_alfa-on-white"));
+        WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Тестов Тест");
         form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         form.findElement(By.cssSelector("button")).click();
-        String text = driver.findElement(By.className("input_invalid")).findElement(By.className("input__sub")).getText();
+        String text = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")).getText();
         assertEquals("Поле обязательно для заполнения", text.trim());
     }
 
     @Test
     void checkboxNegativeTest(){
-        WebElement form = driver.findElement(By.className("form_theme_alfa-on-white"));
+        WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Тестов Тест");
         form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79876543221");
         form.findElement(By.cssSelector("button")).click();
-        String text = driver.findElement(By.cssSelector("[data-test-id=agreement]")).getAttribute("class");
-        assertTrue(text.contains("input_invalid"));
+        boolean text = driver.findElement(By.cssSelector("[data-test-id=agreement].input_invalid .checkbox__text")).isDisplayed();
+        assertTrue(text);
     }
 
     @Test
     void nameFormatNegativeTest(){
-        WebElement form = driver.findElement(By.className("form_theme_alfa-on-white"));
+        WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Test Testov");
         form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79876543221");
         form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -91,7 +91,7 @@ public class SeleniumTest {
 
     @Test
     void phoneFormNegativeTest(){
-        WebElement form = driver.findElement(By.className("form_theme_alfa-on-white"));
+        WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Тестов Тест");
         form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("79876+543221");
         form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
